@@ -1,6 +1,19 @@
 $( document ).ready(function() {
     // An array of actions, new actions will be pushed into this array;
-    var actions = ["Desus & Mero", "The Golden Girls", "Blackish", "The Office", "Atlanta", "The Amazing World of Gumball", "Living Single", "Martin", "Friends", "Breaking Bad","Insecure", "Archer", "The Simpsons"];
+    var actions = [
+    "Desus & Mero", 
+    "The Golden Girls", 
+    "Blackish", 
+    "The Office",
+    "Atlanta", 
+    "The Amazing World of Gumball",
+    "Living Single", 
+    "Martin", 
+    "Friends", 
+    "Breaking Bad",
+    "Insecure", 
+    "Archer", 
+    "The Simpsons"]; 
     // Creating Functions & Methods
     // Function that displays all gif buttons
     function displayGifButtons(){
@@ -29,25 +42,19 @@ $( document ).ready(function() {
         });
     }
     // Function to remove last action button
-        // Doesnt work properly yet removes all of the added buttons
+       
         // rather than just the last
-    function removeLastButton(){
-        $("removeGif").on("click", function(){
-        actions.pop(action);
-        displayGifButtons();
-        return false;
-        });
-    }
+    
     // Function that displays all of the gifs
     function displayGifs(){
         var action = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=dc6zaTOxFJmzC&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=dc6zaTOxFJmzC&limit=10";
         console.log(queryURL); // displays the constructed url
         $.ajax({
             url: queryURL,
             method: 'GET'
         })
-        .done(function(response) {
+        .then(function(response) {
             console.log(response); // console test to make sure something returns
             $("#gifsView").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
             var results = response.data; //shows results of gifs
@@ -78,7 +85,7 @@ $( document ).ready(function() {
     // Calling Functions & Methods
     displayGifButtons(); // displays list of actions already created
     addNewButton();
-    removeLastButton();
+
     // Document Event Listeners
     $(document).on("click", ".action", displayGifs);
     $(document).on("click", ".image", function(){
